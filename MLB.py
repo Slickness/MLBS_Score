@@ -1,16 +1,18 @@
 import requests
 from bs4 import BeautifulSoup
-#import os
 
-
-#url2 = "http://www.sportsnet.ca/hockey/nhl/scores/"
 def print_Games(Games   ):
+    #used to print the results to the screen
+    #index values  0 & 1 team and score vis
+    #index values  2 & 3 team and score home
+    #index value 4 status of game
     for Game in Games:
         print (Game[4])
         print (Game[0] + " " + Game[1])
         print (Game[2] + " " + Game[3])
         print ("---------------------------------")
 def get_games(teams,scores,status):
+#combine all the teams and scores and status into games
     Games = []
     for x in range(len(teams)):
         Game = []
@@ -24,6 +26,7 @@ def get_games(teams,scores,status):
         Games[x].append(status[x])
     return Games
 def main(url):
+   #get the page and collect the teams and scores and status of game
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html.parser")
 
