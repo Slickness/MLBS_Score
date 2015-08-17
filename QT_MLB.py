@@ -13,7 +13,7 @@ class Window(QtGui.QWidget):
         self.setWindowTitle("MLB Scores")
         self.home()
         self.thread = Worker()
-
+        self.setFixedSize(200,100)
     def home(self):
         btn =  QtGui.QPushButton("Get Score",self)
         btn.move(65,0)
@@ -70,12 +70,13 @@ class Worker(QtCore.QThread):
         global games
         global game
         url ="http://www.sportsnet.ca/baseball/mlb/scores/"
-        games = MLB.main(url)
-        for game in games:
-            time.sleep(5)
-            #print  "over with thread"
+        while True:
+            games = MLB.main(url)
+            for game in games:
+                time.sleep(5)
+                #print  "over with thread"
 
-            self.emit(QtCore.SIGNAL("ThreadDone()"))
+                self.emit(QtCore.SIGNAL("ThreadDone()"))
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     GUI = Window()
