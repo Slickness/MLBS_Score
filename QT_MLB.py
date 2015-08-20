@@ -12,7 +12,7 @@ class Window(QtGui.QWidget):
         self.setGeometry(50,50,200,100)
         self.setWindowTitle("MLB Scores")
         self.home()
-        self.thread = Worker()
+        self.thread = Worker() #to enable the updating of the widget
         self.setFixedSize(200,100)
     def home(self):
         btn =  QtGui.QPushButton("Get Score",self)
@@ -36,8 +36,7 @@ class Window(QtGui.QWidget):
         self.LabelVis.setFixedWidth((200))
         self.LableHScore.setFixedWidth(50)
         self.LableVScore.setFixedWidth(50)
-        #btn.resize(100,100)
-        #btn.move(100,100)
+
 
         self.show()
     def score(self):
@@ -46,8 +45,10 @@ class Window(QtGui.QWidget):
     def ShowScores(self):
         global x
         global game
+        self.palette = QtGui.QPalette()
+        self.palette.setColor(QtGui.QPalette.Window,QtCore.Qt.yellow)
         self.LabelStatus.setText(game[4])
-
+        self.LabelStatus.setPalette(self.palette)
         self.LabelHome.setText(game[2])
 
         self.LabelVis.setText(game[0])
