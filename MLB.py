@@ -35,6 +35,7 @@ def main(url):
     Score_Teams = []
     Teams_Status = []
     for Game in g_data:
+        
         #print ('--------------------')
         Game_Teams = Game.find_all('div',{"class":"team-text-container"})
 
@@ -51,6 +52,8 @@ def main(url):
         Game_Status =Game.find_all('div',{"class":"game-time-start"})
         if Game_Status == []:
             Game_Status =Game.find_all('div',{"class":"final"})
+        if Game_Status ==[]:
+            Game_status = Game.find_all('div',{"class":"col-xs-3 scores-game-status"})
 
 
         for Status in Game_Status:
