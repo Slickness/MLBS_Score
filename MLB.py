@@ -53,7 +53,7 @@ def main(url):
         if Game_Status == []:
             Game_Status =Game.find_all('div',{"class":"final"})
         if Game_Status ==[]:
-            Game_status = Game.find_all('div',{"class":"col-xs-3 scores-game-status"})
+            Game_Status = Game.find_all('div',{"class":"col-xs-3 scores-game-status"})
 
 
         for Status in Game_Status:
@@ -76,3 +76,4 @@ if __name__=="__main__":
     url ="http://www.sportsnet.ca/baseball/mlb/scores/"
     url2= "http://www.sportsnet.ca/baseball/mlb/scores/?datepicker-date=2015-08-11"
     Games = main(url)
+    print_Games(Games)
