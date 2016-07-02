@@ -17,13 +17,13 @@ def get_games(teams,scores,status):
     for x in range(len(teams)):
         Game = []
         if x%2 == 0:
-            Game.append(teams[x])
-            Game.append(scores[x])
-            Game.append(teams[x+1])
-            Game.append(scores[x+1])
+            Game.append(str(teams[x]))
+            Game.append(str(scores[x]))
+            Game.append(str(teams[x+1]))
+            Game.append(str(scores[x+1]))
             Games.append(Game)
     for x in range(len(Games)):
-        Games[x].append(status[x])
+        Games[x].append(str(status[x]))
     return Games
 def main(url):
    #get the page and collect the teams and scores and status of game
@@ -53,12 +53,19 @@ def main(url):
         if Game_Status == []:
             Game_Status =Game.find_all('div',{"class":"final"})
         if Game_Status ==[]:
-            Game_Status = Game.find_all('div',{"class":"col-xs-3 scores-game-status"})
-
+            if Game.find_all('div',{"class":"col-xs-3 scores-game-statys"}):
+                Game_Status = Game.find_all('div',{"game-status"})
+            else:
+                Game_Status = Game.find_all('div',{"class":"col-xs-3 scores-game-status"})
+        div = "document"
+        other = "$"
+        #Game_status,sep,tail = Game_Status.partition(div) 
 
         for Status in Game_Status:
-
-            Teams_Status.append(Status.text)
+            #print Status
+            Status,sep,tail = Status.text.partition(div)
+            Status,sep,tail = Status.partition(other)
+            Teams_Status.append(Status.strip())
     New_Scores = []
     for x in Score_Teams:
         y = x.strip('\n')
